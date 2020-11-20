@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact {% endblock title %}
+{% block body %} 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /*text-align: center; */
+}
+
+#wrapper {
+    padding: 10px;
+    background:rgb(248, 247, 247);
+    display: block;
+    width: 100%;
+}
+
+#center {
+    padding-left: 20pt;
+    
+
+}
+
+#left {
+    margin-top: 5pt;
+    width: 190px;
+    float: left;
+
+}
+
+#right {
+    float: right;
+    width: 300px;
+    margin-top: 10pt;
+
+}
+
+.left-sidebar1 {
+    background: white;
+    box-shadow: 12px 0px 19px rgb(240, 238, 238);
+    margin: 0;
+    padding: 0;
+    
+
+}
+
+
+
+.left-sidebar1 a {
+    font-size: 13px;
+    padding: 9px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    color: white;
+    display: block;
+
+}
+
+.left-sidebar1 a {
+    color: rgba(78, 78, 78, 0.84);
+
+    text-align: left;
+
+
+}
+
+.left-sidebar1 a:hover {
+    padding-left: 14pt;
+    color: black;
+}
+
+
+
+
+
+
+
+
+</style>
+<div id="wrapper">
+    
+    
+    <div id="left">
+
+              <div class="left-sidebar1">
+                      
+                     <a href="#">Dashboard</a><br>
+                     <a href="#">Courses Enrolled</a><br>
+                     <a href="#">Courses Completed</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     
+                     
+              </div>
+
+
+              
+
+
+        </div>
+
+<!-- code  -->
+<div id="center" >
+    <div class="container my-3" style="padding-left: 85pt;">
+        <p>This is an Informative Video about the Topic to help ensure success in the Simulation as well as test</p>
+        <h2 class="blog-post-title" style="padding-left: 20pt;" >{{post.title}}</h2>
+        <p class="blog-post-meta" style="padding-left: 20pt;">{{post.timeStamp}} {{post.author}}</p>
+        <p>{{post.content|safe}}</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/IJWEtCRWGvI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <hr>
+         <a href="{% url 'quiz'%}" role="button" class="btn btn-primary " col> Quiz </a>
+
+        
+    
+    </div>
+    </div>
+
+
+{% endblock body %}

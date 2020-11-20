@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% block title %} Blogpost{% endblock title %}
+{% block body %}
+{% load humanize %}
+{% load extras %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /*text-align: center; */
+}
+
+#wrapper {
+    padding: 10px;
+    background:rgb(248, 247, 247);
+    display: block;
+    width: 100%;
+}
+
+#center {
+    padding-left: 20pt;
+    
+
+}
+
+#left {
+    margin-top: 5pt;
+    width: 190px;
+    float: left;
+
+}
+
+#right {
+    float: right;
+    width: 300px;
+    margin-top: 10pt;
+
+}
+
+.left-sidebar1 {
+    background: white;
+    box-shadow: 12px 0px 19px rgb(240, 238, 238);
+    margin: 0;
+    padding: 0;
+    
+
+}
+
+
+
+.left-sidebar1 a {
+    font-size: 13px;
+    padding: 9px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    color: white;
+    display: block;
+
+}
+
+.left-sidebar1 a {
+    color: rgba(78, 78, 78, 0.84);
+
+    text-align: left;
+
+
+}
+
+.left-sidebar1 a:hover {
+    padding-left: 14pt;
+    color: black;
+}
+
+
+
+
+
+
+
+
+</style>
+<div id="wrapper">
+    
+    
+    <div id="left">
+
+              <div class="left-sidebar1">
+                      
+                     <a href="#">Dashboard</a><br>
+                     <a href="#">Courses Enrolled</a><br>
+                     <a href="#">Courses Completed</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     
+                     
+              </div>
+
+
+              
+
+
+        </div>
+
+        <div id="center" >
+<div class="container my-3" style="padding-left: 85pt;">
+    <h2 class="blog-post-title" style="padding-left: 20pt;" >{{post.title}}</h2>
+    <p class="blog-post-meta" style="padding-left: 20pt;">{{post.timeStamp}} by {{post.author}}</p>
+    <p>{{post.content|safe}}</p>
+    <iframe src="https://phet.colorado.edu/sims/html/balancing-act/latest/balancing-act_en.html" width="800" height="600" scrolling="no" allowfullscreen></iframe>
+
+    <hr>
+    <a href="{% url 'quiz'%}" role="button" class="btn btn-primary " col> Quiz </a>
+    <a href="{% url 'video'%}" role="button" class="btn btn-primary " col> Video </a>
+
+    
+
+</div>
+</div>
+
+{% endblock %}

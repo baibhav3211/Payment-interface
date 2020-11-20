@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %} Blog {% endblock title %}
+
+{% block js %}
+<script>
+    let previews = document.getElementByClassName('preview');
+    Array.from(previews).forEach((element) => {
+        element.innerHTML = element.innerText;
+    })
+</script>
+{% endblock js %}
+
+{% block blogactive %} active {% endblock blogactive %}
+{% block body %}
+<div class="container my-3">
+    <h2>Coding Articles by iCoder:</h2>
+    {% for post in allPosts %}
+
+
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article by {{post.author}} ({{post.views}} views)</strong>
+            <h3 class="mb-0">{{post.title}}</h3>
+            <div class="mb-1 text-muted">{{post.datetime}}</div>
+            <p class="card-text mb-auto">
+            <div class="preview">{{post.content|safe| truncatechars:200 }}</div>
+            </p>
+            <div class="my-2">
+                {% if post.check_enroll %}
+                <a href="{% url 'deroll' post.slug %}" role="button" class="btn btn-primary">DEROLL</a>
+                {% else %}
+                <!-- <a href="{% url 'enroll' post.slug %}" role="button" class="btn btn-primary" id="rzp-button1" method="POST">Pay to ENROLL</a> -->
+                <!-- <button id="rzp-button1" class="btn btn-success" href="{% url 'enroll' post.slug %}">Enroll</button> -->
+                <form method="POST" action="success">
+                    <a href="{% url 'enroll' post.slug %}" role="button" class="btn btn-primary" id="rzp-button1">Pay to ENROLL</a>
+                </form>
+                {% endif %}
+                
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+                <script>
+                var options = {   
+                     "key": "rzp_test_Dk1stp553UnTd6",  
+                     "amount": "100", 
+                     "currency": "INR",   
+                     "name": "C cube",    
+                     "description": "Test Transaction",    
+                     "image": "https://example.com/your_logo",    
+                     "order_id": "{{payment.id}}", 
+                     "handler": function (response){        
+                         alert(response.razorpay_payment_id);        
+                         alert(response.razorpay_order_id);        
+                         alert(response.razorpay_signature);    
+                         },    
+                         "prefill": {        
+                             "name": "Baibhav",        
+                             "email": "baibhavmishra3211@gmail.com",        
+                             "contact": "6387978916"    
+                            },    
+                             "notes": {        
+                                 "address": "Razorpay Corporate Office"    
+                                 },    
+                                 "theme": {        
+                                     "color": "#3399cc"    
+                                     }};
+                                     var rzp1 = new Razorpay(options);
+                                     rzp1.on('payment.failed', function (response){        
+                                         alert(response.error.code);        
+                                         alert(response.error.description);        
+                                         alert(response.error.source);        
+                                         alert(response.error.step);        
+                                         alert(response.error.reason);        
+                                         alert(response.error.metadata.order_id);        
+                                         alert(response.error.metadata.payment_id);
+                                         });
+                                         document.getElementById('rzp-button1').onclick = function(e){    
+                                             rzp1.open();    
+                                             e.preventDefault();
+                                             }
+                                             </script>
+            </div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+
+        </div>
+    </div>
+
+
+    {% endfor %}
+</div>
+{% endblock body %}

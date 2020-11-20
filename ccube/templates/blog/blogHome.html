@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %} Blog {% endblock title %}
+
+{% block js %}
+<script>
+    let previews = document.getElementByClassName('preview');
+    Array.from(previews).forEach((element)=>{
+        element.innerHTML = element.innerText;
+    })
+</script>
+{% endblock js %}
+
+{% block enrollactive %} active {% endblock enrollactive %}
+{% block body %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /*text-align: center; */
+}
+
+#wrapper {
+    background:rgb(248, 247, 247);
+    padding: 10px;
+    display: block;
+    width: 100%;
+}
+
+#center {
+    margin-left: 10pt;
+}
+
+#left {
+    margin-top: 5pt;
+    width: 190px;
+    float: left;
+
+}
+
+#right {
+    float: right;
+    width: 300px;
+    margin-top: 10pt;
+
+}
+
+.left-sidebar1 {
+    background: white;
+    box-shadow: 12px 0px 19px rgb(238, 236, 236);
+    margin: 0;
+    padding: 0;
+
+}
+
+
+
+.left-sidebar1 a {
+    font-size: 13px;
+    padding: 9px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 600;
+    color: white;
+    display: block;
+
+}
+
+.left-sidebar1 a {
+    color: rgba(78, 78, 78, 0.84);
+
+    text-align: left;
+
+
+}
+
+.left-sidebar1 a:hover {
+    padding-left: 14pt;
+    color: black;
+}
+
+
+
+
+
+</style>
+<div id="wrapper">
+    
+    
+    <div id="left">
+
+              <div class="left-sidebar1">
+                      
+                     <a href="#">Dashboard</a><br>
+                     <a href="#">Courses Enrolled</a><br>
+                     <a href="#">Courses Completed</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     <a href="#">Rewards</a><br>
+                     <a href="#">Forum</a><br>
+                     <a href="#">Groups</a><br>
+                     
+                     
+              </div>
+
+
+        </div>
+
+        <div id="center" style="margin-left: 130pt;">
+<div class="container my-3" >
+    <h2> Coding Articles by iCoder:</h2>
+    {% for post in allPosts %}
+    
+    
+    <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative" >
+        <div class="col p-4 d-flex flex-column position-static">
+            <strong class="d-inline-block mb-2 text-primary">Article by {{post.post.author}} ({{post.views}} views)</strong>
+            <h3 class="mb-0">{{post.post.title}}</h3>
+            <div class="mb-1 text-muted">{{post.datetime}}</div>
+            <p class="card-text mb-auto"><div class="preview">{{post.post.content|safe| truncatechars:200 }}</div></p>
+            <div class="my-2">
+            <a href="/blog/{{post.post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+            <a href="{% url 'deroll' post.post.slug %}" role="button" class="btn btn-success">DEROLL</a>
+            </div>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+        </div>
+        </div>
+    </div>
+    </div> 
+    </div>
+
+
+    {% endfor %}
+
+{% endblock body %}
